@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}{{ app_name }} | Queue &amp; Staffing Decision Support{% endblock %}
+
+{% block content %}
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+    <div class="container hero-grid">
+
+        <div class="hero-text">
+            <span class="badge">AI + Discrete-Event Simulation</span>
+            <h1>Make staffing decisions with <span class="gradient-text">simulation</span>, not guesswork.</h1>
+            <p class="lead">
+                {{ app_name }} tests different staffing options on a virtual version of your
+                queue, compares the results, and explains the best choice in plain language.
+            </p>
+            <div class="hero-actions">
+                <a href="{{ url_for('analyze') }}" class="btn">Start Analysis</a>
+                <a href="#how-it-works" class="btn btn-ghost">How it works</a>
+            </div>
+        </div>
+
+        <!-- Kartu ilustrasi (hanya hiasan, BUKAN hasil asli) -->
+        <div class="preview glass">
+            <div class="preview-top">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+                <span class="preview-title">Queue analysis preview</span>
+            </div>
+
+            <div class="queue-visual">
+                <div class="customers">
+                    <span class="person"></span>
+                    <span class="person"></span>
+                    <span class="person"></span>
+                    <span class="person"></span>
+                    <span class="person"></span>
+                </div>
+                <span class="arrow">&rarr;</span>
+                <div class="counters">
+                    <div class="counter">Staff 1</div>
+                    <div class="counter">Staff 2</div>
+                </div>
+            </div>
+
+            <div class="bars">
+                <div class="bar-row">
+                    <span>Current</span>
+                    <div class="bar-track"><div class="bar-fill bar-1"></div></div>
+                </div>
+                <div class="bar-row">
+                    <span>+1 staff</span>
+                    <div class="bar-track"><div class="bar-fill bar-2"></div></div>
+                </div>
+                <div class="bar-row">
+                    <span>+2 staff</span>
+                    <div class="bar-track"><div class="bar-fill bar-3"></div></div>
+                </div>
+            </div>
+
+            <p class="preview-note">Illustration only. Real results come from the simulation.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="section" id="how-it-works">
+    <div class="container">
+        <h2 class="section-title">How it works</h2>
+        <p class="section-sub">Four steps from a real-world problem to a clear decision.</p>
+
+        <div class="steps">
+            <div class="card glass">
+                <span class="step-number">1</span>
+                <h3>Describe your queue</h3>
+                <p>Enter arrival rate, service time, staff, costs, and targets, or just describe it in your own words.</p>
+            </div>
+            <div class="card glass">
+                <span class="step-number">2</span>
+                <h3>Simulate scenarios</h3>
+                <p>Each staffing option runs through a discrete-event simulation many times.</p>
+            </div>
+            <div class="card glass">
+                <span class="step-number">3</span>
+                <h3>Compare results</h3>
+                <p>See waiting time, throughput, utilization, and cost side by side.</p>
+            </div>
+            <div class="card glass">
+                <span class="step-number">4</span>
+                <h3>Get a clear decision</h3>
+                <p>AI explains the results and shows exactly why one option is recommended.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ USE CASES ============ -->
+<section class="section">
+    <div class="container center">
+        <h2 class="section-title">Built for everyday service businesses</h2>
+        <div class="chips">
+            <span class="chip">Coffee shops</span>
+            <span class="chip">Restaurants</span>
+            <span class="chip">Campus counters</span>
+            <span class="chip">Clinics</span>
+            <span class="chip">Laundry services</span>
+            <span class="chip">Customer service</span>
+            <span class="chip">Small retail</span>
+        </div>
+    </div>
+</section>
+
+<!-- ============ CALL TO ACTION ============ -->
+<section class="section">
+    <div class="container">
+        <div class="cta glass">
+            <h2>Ready to test your staffing plan?</h2>
+            <p>It only takes a minute to set up your first analysis.</p>
+            <a href="{{ url_for('analyze') }}" class="btn">Start Analysis</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

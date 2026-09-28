@@ -1,0 +1,2230 @@
+{% extends "base.html" %}
+
+{% block title %}New Analysis | {{ app_name }}{% endblock %}
+
+
+{% block content %}
+
+<!-- =====================================================
+     PAGE HEADER
+===================================================== -->
+
+<section class="page-header">
+    <div class="container">
+
+        <span class="badge">New Analysis</span>
+
+        <h1>Understand your queue</h1>
+
+        <p class="lead">
+            Enter a few details about your service system.
+            QueueWise compares operating scenarios to help you
+            understand waiting time, capacity, and cost.
+        </p>
+
+    </div>
+</section>
+
+
+<!-- =====================================================
+     ANALYSIS FORM
+===================================================== -->
+
+<section class="section form-section">
+    <div class="container">
+
+        <form id="analysis-form" class="form-card glass">
+
+            <!-- Data provenance -->
+            <input
+                type="hidden"
+                id="source_type"
+                name="source_type"
+                value="manual"
+            >
+
+            <input
+                type="hidden"
+                id="source_reference"
+                name="source_reference"
+                value=""
+            >
+
+            <input
+                type="hidden"
+                id="source_url"
+                name="source_url"
+                value=""
+            >
+
+
+            <!-- =================================================
+                 1. BUSINESS CONTEXT
+            ================================================== -->
+
+            <div class="form-block">
+
+                <div class="block-heading">
+
+                    <div class="block-number">
+                        01
+                    </div>
+
+                    <div>
+                        <h2 class="block-title">
+                            Business context
+                            <span class="optional">
+                                Optional
+                            </span>
+                        </h2>
+
+                        <p class="block-sub">
+                            Select the environment that best matches
+                            the service queue you want to analyze.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="business-grid">
+
+                    <button
+                        type="button"
+                        class="business-card"
+                        data-business="coffee"
+                    >
+                        <div class="business-icon">☕</div>
+
+                        <div class="business-info">
+                            <strong>Coffee Shop</strong>
+                            <small>
+                                Ordering, cashier, or pickup
+                            </small>
+                        </div>
+
+                        <span class="business-arrow">
+                            →
+                        </span>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="business-card"
+                        data-business="restaurant"
+                    >
+                        <div class="business-icon">🍽️</div>
+
+                        <div class="business-info">
+                            <strong>Restaurant</strong>
+                            <small>
+                                Ordering or service queue
+                            </small>
+                        </div>
+
+                        <span class="business-arrow">
+                            →
+                        </span>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="business-card"
+                        data-business="campus"
+                    >
+                        <div class="business-icon">🎓</div>
+
+                        <div class="business-info">
+                            <strong>Campus Counter</strong>
+                            <small>
+                                Student service queue
+                            </small>
+                        </div>
+
+                        <span class="business-arrow">
+                            →
+                        </span>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="business-card"
+                        data-business="clinic"
+                    >
+                        <div class="business-icon">🏥</div>
+
+                        <div class="business-info">
+                            <strong>Clinic</strong>
+                            <small>
+                                Patient service flow
+                            </small>
+                        </div>
+
+                        <span class="business-arrow">
+                            →
+                        </span>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="business-card"
+                        data-business="laundry"
+                    >
+                        <div class="business-icon">🧺</div>
+
+                        <div class="business-info">
+                            <strong>Laundry Service</strong>
+                            <small>
+                                Drop-off or pickup queue
+                            </small>
+                        </div>
+
+                        <span class="business-arrow">
+                            →
+                        </span>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="business-card"
+                        data-business="retail"
+                    >
+                        <div class="business-icon">🛍️</div>
+
+                        <div class="business-info">
+                            <strong>Small Retail</strong>
+                            <small>
+                                Checkout queue
+                            </small>
+                        </div>
+
+                        <span class="business-arrow">
+                            →
+                        </span>
+                    </button>
+
+                </div>
+
+
+                <!-- Business context result -->
+
+                <div
+                    id="business-context"
+                    class="business-context-box"
+                    hidden
+                >
+
+                    <div
+                        id="example-icon"
+                        class="business-context-icon"
+                    >
+                        ☕
+                    </div>
+
+                    <div class="business-context-copy">
+
+                        <span class="business-context-label">
+                            SELECTED CONTEXT
+                        </span>
+
+                        <h3 id="example-title">
+                            Coffee Shop
+                        </h3>
+
+                        <p id="example-description">
+                            Queue at an ordering, cashier,
+                            or pickup point.
+                        </p>
+
+                        <p class="context-note">
+                            This selection provides context only.
+                            QueueWise does not create operational
+                            values automatically.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+     AI QUEUE DESCRIPTION
+================================================== -->
+
+<div class="form-block ai-description-card">
+
+    <div class="block-heading">
+
+        <div class="block-number">
+            AI
+        </div>
+
+        <div>
+            <h2 class="block-title">
+                Describe your queue
+                <span class="optional">
+                    AI-assisted
+                </span>
+            </h2>
+
+            <p class="block-sub">
+                Tell QueueWise what is happening in your
+                service operation. Write naturally in
+                English or Indonesian.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="ai-description-content">
+
+        <textarea
+            id="description"
+            name="description"
+            rows="5"
+            aria-label="Queue description"
+            placeholder="Example: During lunch around 40 customers arrive each hour. We have 2 cashiers and each customer takes about 3 minutes to serve. We operate 8 hours per day..."
+        ></textarea>
+
+
+        <div class="ai-description-actions">
+
+            <button
+                type="button"
+                id="analyze-description"
+                class="btn btn-secondary"
+            >
+                ✨ Let QueueWise AI understand this
+            </button>
+
+            <span class="hint">
+                AI only fills information it can safely identify.
+                You can review every value before simulation.
+            </span>
+
+        </div>
+
+
+        <div
+            id="ai-extraction-result"
+            class="ai-extraction-result"
+            hidden
+        ></div>
+
+        <!-- AI REVIEW CARD -->
+
+<div
+    id="ai-review-card"
+    class="ai-review-card"
+    hidden
+>
+
+    <div class="ai-review-header">
+
+        <div class="ai-review-icon">
+            ✨
+        </div>
+
+        <div>
+
+            <h3>
+                QueueWise understood your situation
+            </h3>
+
+            <p>
+                Review the information detected by AI
+                before running the simulation.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="ai-review-list"
+        class="ai-review-list"
+    ></div>
+
+
+    <div class="ai-review-footer">
+
+        <span>
+            ✨ AI extracted values can still be edited
+        </span>
+
+    </div>
+
+</div>
+
+    </div>
+
+</div>
+            <!-- =================================================
+                 2. QUEUE DATA
+            ================================================== -->
+
+            <div class="form-block">
+
+                <div class="block-heading">
+
+                    <div class="block-number">
+                        02
+                    </div>
+
+                    <div>
+                        <h2 class="block-title">
+                            Queue data
+                        </h2>
+
+                        <p class="block-sub">
+                            These three measurements describe how
+                            your queue currently operates.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="section-note">
+
+                    <span class="section-note-icon">
+                        ✓
+                    </span>
+
+                    <p>
+                        Use observed or measured data whenever possible.
+                        Hover or tap <strong>?</strong> if you are unsure
+                        what an input means.
+                    </p>
+
+                </div>
+
+
+                <div class="metric-input-grid">
+
+
+                    <!-- =========================================
+                         ARRIVAL RATE
+                    ========================================== -->
+
+                    <div class="metric-input-card">
+
+                        <div class="metric-card-top">
+
+                            <div class="metric-heading">
+
+                                <div class="metric-icon">
+
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        aria-hidden="true"
+                                    >
+                                        <circle cx="8" cy="8" r="3"></circle>
+                                        <circle cx="17" cy="9" r="2.4"></circle>
+                                        <path d="M2.8 19c0-3.5 2.2-6 5.2-6s5.2 2.5 5.2 6"></path>
+                                        <path d="M14 14c.8-.7 1.8-1.1 3-1.1 2.5 0 4.2 2 4.2 4.8"></path>
+                                    </svg>
+
+                                </div>
+
+                                <div>
+
+                                    <label for="arrival_rate">
+                                        Customer arrival rate
+                                    </label>
+
+                                    <span class="metric-subtitle">
+                                        Customer demand
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <details class="field-help">
+
+                                <summary
+                                    aria-label="Explain customer arrival rate"
+                                >
+                                    ?
+                                </summary>
+
+                                <div class="help-popover">
+
+                                    <strong>
+                                        What does this mean?
+                                    </strong>
+
+                                    <p>
+                                        The average number of customers
+                                        entering the queue in one hour.
+                                    </p>
+
+                                    <strong>
+                                        How do I get it?
+                                    </strong>
+
+                                    <p>
+                                        Count customer arrivals during an
+                                        observed period, then convert the
+                                        result to customers per hour.
+                                    </p>
+
+                                    <strong>
+                                        Example
+                                    </strong>
+
+                                    <p>
+                                        20 customers arriving in 30 minutes
+                                        is equivalent to approximately
+                                        40 customers per hour.
+                                    </p>
+
+                                </div>
+
+                            </details>
+
+                        </div>
+
+
+                        <div class="metric-value-box">
+
+                            <input
+                                type="number"
+                                id="arrival_rate"
+                                name="arrival_rate"
+                                min="0.1"
+                                max="1000"
+                                step="any"
+                                placeholder="Enter value"
+                                required
+                            >
+
+                        </div>
+
+
+                       <div class="metric-unit">
+    Rp / staff / hour
+</div>
+
+                    </div>
+
+
+                    <!-- =========================================
+                         SERVICE TIME
+                    ========================================== -->
+
+                    <div class="metric-input-card">
+
+                        <div class="metric-card-top">
+
+                            <div class="metric-heading">
+
+                                <div class="metric-icon">
+
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        aria-hidden="true"
+                                    >
+                                        <circle cx="12" cy="12" r="8.5"></circle>
+                                        <path d="M12 7.5V12l3 2"></path>
+                                    </svg>
+
+                                </div>
+
+                                <div>
+
+                                    <label for="service_time">
+                                        Average service time
+                                    </label>
+
+                                    <span class="metric-subtitle">
+                                        Service speed
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <details class="field-help">
+
+                                <summary
+                                    aria-label="Explain average service time"
+                                >
+                                    ?
+                                </summary>
+
+                                <div class="help-popover">
+
+                                    <strong>
+                                        What does this mean?
+                                    </strong>
+
+                                    <p>
+                                        The average time one staff member
+                                        needs to complete service for one
+                                        customer.
+                                    </p>
+
+                                    <strong>
+                                        How do I get it?
+                                    </strong>
+
+                                    <p>
+                                        Observe several customer
+                                        transactions and calculate their
+                                        average service duration.
+                                    </p>
+
+                                </div>
+
+                            </details>
+
+                        </div>
+
+
+                        <div class="metric-value-box">
+
+                            <input
+                                type="number"
+                                id="service_time"
+                                name="service_time"
+                                min="0.1"
+                                max="120"
+                                step="any"
+                                placeholder="Enter value"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="metric-unit">
+                            minutes / customer
+                        </div>
+
+                    </div>
+
+
+                    <!-- =========================================
+                         STAFF
+                    ========================================== -->
+
+                    <div class="metric-input-card">
+
+                        <div class="metric-card-top">
+
+                            <div class="metric-heading">
+
+                                <div class="metric-icon">
+
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        aria-hidden="true"
+                                    >
+                                        <circle cx="12" cy="7.5" r="3.2"></circle>
+                                        <path d="M5.5 20c0-4 2.6-6.5 6.5-6.5S18.5 16 18.5 20"></path>
+                                    </svg>
+
+                                </div>
+
+                                <div>
+
+                                    <label for="staff">
+                                        Current staff / counters
+                                    </label>
+
+                                    <span class="metric-subtitle">
+                                        Service capacity
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <details class="field-help">
+
+                                <summary
+                                    aria-label="Explain current staff"
+                                >
+                                    ?
+                                </summary>
+
+                                <div class="help-popover">
+
+                                    <strong>
+                                        What should I enter?
+                                    </strong>
+
+                                    <p>
+                                        Enter the number of staff members
+                                        or counters that can serve customers
+                                        at the same time.
+                                    </p>
+
+                                    <strong>
+                                        Important
+                                    </strong>
+
+                                    <p>
+                                        Count only active service points
+                                        involved in this queue.
+                                    </p>
+
+                                </div>
+
+                            </details>
+
+                        </div>
+
+
+                        <div class="metric-value-box">
+
+                            <input
+                                type="number"
+                                id="staff"
+                                name="staff"
+                                min="1"
+                                max="50"
+                                step="1"
+                                placeholder="Enter value"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="metric-unit">
+                            active service points
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 3. DECISION CRITERIA
+            ================================================== -->
+
+            <div class="form-block">
+
+                <div class="block-heading">
+
+                    <div class="block-number">
+                        03
+                    </div>
+
+                    <div>
+                        <h2 class="block-title">
+                            Decision criteria
+                        </h2>
+
+                        <p class="block-sub">
+                            These values are used to evaluate whether
+                            each scenario is practical for your operation.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="criteria-explanation">
+
+                    <div>
+                        <strong>Queue data</strong>
+                        describes the current system.
+                    </div>
+
+                    <span>→</span>
+
+                    <div>
+                        <strong>Decision criteria</strong>
+                        define your operational limits and goals.
+                    </div>
+
+                </div>
+
+
+                <div class="metric-input-grid">
+
+
+                    <!-- OPERATING HOURS -->
+
+                    <div class="metric-input-card">
+
+                        <div class="metric-card-top">
+
+                            <div class="metric-heading">
+
+                                <div class="metric-icon">
+
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        aria-hidden="true"
+                                    >
+                                        <circle cx="12" cy="12" r="8.5"></circle>
+                                        <path d="M12 7.5V12h4"></path>
+                                    </svg>
+
+                                </div>
+
+                                <div>
+
+                                    <label for="operating_hours">
+                                        Operating hours
+                                    </label>
+
+                                    <span class="metric-subtitle">
+                                        Daily operating period
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <details class="field-help">
+
+                                <summary
+                                    aria-label="Explain operating hours"
+                                >
+                                    ?
+                                </summary>
+
+                                <div class="help-popover">
+
+                                    <strong>
+                                        Why is this needed?
+                                    </strong>
+
+                                    <p>
+                                        Operating hours are used when
+                                        QueueWise calculates daily staffing
+                                        cost.
+                                    </p>
+
+                                    <strong>
+                                        What should I enter?
+                                    </strong>
+
+                                    <p>
+                                        Enter the number of hours this
+                                        service operates in one working day.
+                                    </p>
+
+                                </div>
+
+                            </details>
+
+                        </div>
+
+
+                        <div class="metric-value-box">
+
+                            <input
+                                type="number"
+                                id="operating_hours"
+                                name="operating_hours"
+                                min="0.1"
+                                max="24"
+                                step="any"
+                                placeholder="Enter value"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="metric-unit">
+                            hours / day
+                        </div>
+
+                    </div>
+
+
+                    <!-- STAFF COST -->
+
+                    <div class="metric-input-card">
+
+                        <div class="metric-card-top">
+
+                            <div class="metric-heading">
+
+                                <div class="metric-icon">
+
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        aria-hidden="true"
+                                    >
+                                        <circle cx="12" cy="12" r="8.5"></circle>
+                                        <path d="M9.2 14.5c0 1.3 1.2 2.1 2.8 2.1s2.8-.8 2.8-2c0-2.8-5.6-1.1-5.6-4 0-1.2 1.2-2 2.8-2s2.8.8 2.8 2"></path>
+                                        <path d="M12 6.5v2M12 16.5v2"></path>
+                                    </svg>
+
+                                </div>
+
+                                <div>
+
+                                    <label for="staff_cost">
+                                        Staff cost
+                                    </label>
+
+                                    <span class="metric-subtitle">
+                                        Cost per staff member
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <details class="field-help">
+
+                                <summary
+                                    aria-label="Explain staff cost"
+                                >
+                                    ?
+                                </summary>
+
+                                <div class="help-popover">
+
+                                    <strong>
+                                        Why is this needed?
+                                    </strong>
+
+                                    <p>
+                                        QueueWise compares the daily
+                                        operating cost of different
+                                        staffing levels.
+                                    </p>
+
+                                    <strong>
+                                        What should I enter?
+                                    </strong>
+
+                                    <p>
+                                        Enter the hourly cost of one
+                                        service staff member.
+                                    </p>
+
+                                </div>
+
+                            </details>
+
+                        </div>
+
+
+                        <div class="metric-value-box">
+
+                            <input
+                                type="number"
+                                id="staff_cost"
+                                name="staff_cost"
+                                min="0"
+                                step="any"
+                                placeholder="Enter value"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="metric-unit">
+                            per staff / hour
+                        </div>
+
+                    </div>
+
+
+                    <!-- MAX WAIT -->
+
+                    <div class="metric-input-card">
+
+                        <div class="metric-card-top">
+
+                            <div class="metric-heading">
+
+                                <div class="metric-icon">
+
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        aria-hidden="true"
+                                    >
+                                        <path d="M7 3h10M7 21h10"></path>
+                                        <path d="M8 4c0 4 4 5 4 8s-4 4-4 8"></path>
+                                        <path d="M16 4c0 4-4 5-4 8s4 4 4 8"></path>
+                                    </svg>
+
+                                </div>
+
+                                <div>
+
+                                    <label for="max_wait">
+                                        Maximum acceptable wait
+                                    </label>
+
+                                    <span class="metric-subtitle">
+                                        Service target
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <details class="field-help">
+
+                                <summary
+                                    aria-label="Explain waiting target"
+                                >
+                                    ?
+                                </summary>
+
+                                <div class="help-popover">
+
+                                    <strong>
+                                        This is your target.
+                                    </strong>
+
+                                    <p>
+                                        Enter the longest average waiting
+                                        time you consider acceptable.
+                                    </p>
+
+                                    <p>
+                                        QueueWise uses this value to
+                                        determine whether a scenario meets
+                                        your service goal.
+                                    </p>
+
+                                </div>
+
+                            </details>
+
+                        </div>
+
+
+                        <div class="metric-value-box">
+
+                            <input
+                                type="number"
+                                id="max_wait"
+                                name="max_wait"
+                                min="0.1"
+                                max="120"
+                                step="any"
+                                placeholder="Enter value"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="metric-unit">
+                            minutes
+                        </div>
+
+                    </div>
+
+
+                    <!-- BUDGET -->
+
+                    <div class="metric-input-card">
+
+                        <div class="metric-card-top">
+
+                            <div class="metric-heading">
+
+                                <div class="metric-icon">
+
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        aria-hidden="true"
+                                    >
+                                        <rect
+                                            x="3"
+                                            y="6"
+                                            width="18"
+                                            height="13"
+                                            rx="2"
+                                        ></rect>
+                                        <path d="M3 10h18"></path>
+                                        <path d="M16 14h2"></path>
+                                    </svg>
+
+                                </div>
+
+                                <div>
+
+                                    <label for="budget">
+                                        Maximum daily budget
+                                    </label>
+
+                                    <span class="metric-subtitle">
+                                        Spending limit
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <details class="field-help">
+
+                                <summary
+                                    aria-label="Explain maximum budget"
+                                >
+                                    ?
+                                </summary>
+
+                                <div class="help-popover">
+
+                                    <strong>
+                                        This is your spending limit.
+                                    </strong>
+
+                                    <p>
+                                        Enter the maximum operating cost
+                                        you are willing to spend in one day.
+                                    </p>
+
+                                    <p>
+                                        QueueWise compares every scenario
+                                        against this value.
+                                    </p>
+
+                                </div>
+
+                            </details>
+
+                        </div>
+
+
+                        <div class="metric-value-box">
+
+                            <input
+                                type="number"
+                                id="budget"
+                                name="budget"
+                                min="0"
+                                step="any"
+                                placeholder="Enter value"
+                                required
+                            >
+
+                        </div>
+
+
+                       <div class="metric-unit">
+    Rp / day
+</div>  
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 4. IMPROVEMENT ASSUMPTIONS
+            ================================================== -->
+
+            <div class="form-block compact-block">
+
+                <details class="advanced-panel">
+
+                    <summary>
+
+                        <div class="advanced-summary">
+
+                            <div class="advanced-icon">
+                                ⚙️
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Improvement assumptions
+                                </strong>
+
+                                <small>
+                                    Test faster service or pre-order
+                                    scenarios
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                        <span class="optional">
+                            Advanced
+                        </span>
+
+                    </summary>
+
+
+                    <div class="advanced-content">
+
+                        <div class="assumption-warning">
+
+                            <span class="assumption-warning-icon">
+                                !
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    These are your assumptions.
+                                </strong>
+
+                                <p>
+                                    QueueWise does not predict how much
+                                    faster a process improvement will make
+                                    your service. Leave values at 0 if you
+                                    do not want to test them.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+                            <div class="field">
+
+                                <label for="speedup_percent">
+                                    Faster service
+                                    <span class="unit">
+                                        % shorter service time
+                                    </span>
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="speedup_percent"
+                                    name="speedup_percent"
+                                    value="0"
+                                    min="0"
+                                    max="50"
+                                    step="any"
+                                >
+
+                                <p class="hint">
+                                    Example: improved preparation,
+                                    workflow, or equipment.
+                                </p>
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <label for="speedup_cost">
+                                    Faster-service cost
+                                    <span class="unit">
+                                        per day
+                                    </span>
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="speedup_cost"
+                                    name="speedup_cost"
+                                    value="0"
+                                    min="0"
+                                    step="any"
+                                >
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <label for="preorder_share_percent">
+                                    Pre-order / self-order
+                                    <span class="unit">
+                                        % skipping counter
+                                    </span>
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="preorder_share_percent"
+                                    name="preorder_share_percent"
+                                    value="0"
+                                    min="0"
+                                    max="60"
+                                    step="any"
+                                >
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <label for="preorder_cost">
+                                    Pre-order system cost
+                                    <span class="unit">
+                                        per day
+                                    </span>
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="preorder_cost"
+                                    name="preorder_cost"
+                                    value="0"
+                                    min="0"
+                                    step="any"
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </details>
+
+            </div>
+
+
+            <!-- =================================================
+                 5. CUSTOM SCENARIOS
+            ================================================== -->
+
+            <div class="form-block compact-block">
+
+                <details class="advanced-panel">
+
+                    <summary>
+
+                        <div class="advanced-summary">
+
+                            <div class="advanced-icon">
+                                🧪
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Create your own scenarios
+                                </strong>
+
+                                <small>
+                                    Combine staffing and process changes
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                        <span class="optional">
+                            Optional
+                        </span>
+
+                    </summary>
+
+
+                    <div class="advanced-content">
+
+                        <p class="block-sub">
+                            You can add up to five custom scenarios.
+                        </p>
+
+
+                        <div class="form-grid">
+
+                            <div class="field">
+
+                                <label for="custom_name">
+                                    Scenario name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="custom_name"
+                                    maxlength="60"
+                                    placeholder="e.g. Kiosk + one more staff"
+                                >
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <label for="custom_staff">
+                                    Staff change
+                                    <span class="unit">
+                                        people
+                                    </span>
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="custom_staff"
+                                    value="0"
+                                    min="-49"
+                                    max="49"
+                                    step="1"
+                                >
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <label for="custom_speedup">
+                                    Faster service
+                                    <span class="unit">%</span>
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="custom_speedup"
+                                    value="0"
+                                    min="0"
+                                    max="50"
+                                    step="any"
+                                >
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <label for="custom_preorder">
+                                    Pre-order share
+                                    <span class="unit">%</span>
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="custom_preorder"
+                                    value="0"
+                                    min="0"
+                                    max="60"
+                                    step="any"
+                                >
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <label for="custom_cost">
+                                    Extra cost
+                                    <span class="unit">
+                                        per day
+                                    </span>
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="custom_cost"
+                                    value="0"
+                                    min="0"
+                                    step="any"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="ai-row">
+
+                            <button
+                                type="button"
+                                id="add-custom"
+                                class="btn btn-small"
+                            >
+
+                                <span
+                                    id="add-icon"
+                                    class="icon"
+                                ></span>
+
+                                Add scenario
+
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            id="custom-list"
+                            class="chip-list"
+                        ></div>
+
+                    </div>
+
+                </details>
+
+            </div>
+
+
+            <!-- =================================================
+                 RUN ANALYSIS
+            ================================================== -->
+
+            <div class="analysis-run-card">
+
+                <div class="analysis-run-copy">
+
+                    <span class="run-kicker">
+                        READY TO ANALYZE
+                    </span>
+
+                    <h3>
+                        Compare your operating scenarios
+                    </h3>
+
+                    <p>
+                        QueueWise runs 30 simulated operating days
+                        per scenario and compares waiting time,
+                        capacity, and cost.
+                    </p>
+
+                </div>
+
+
+                <div class="analysis-actions">
+
+                    <button
+                        type="button"
+                        id="reset-form"
+                        class="btn btn-ghost"
+                    >
+                        Reset
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        id="submit-button"
+                        class="btn btn-run"
+                    >
+
+                        <span
+                            id="submit-icon"
+                            class="icon btn-icon-play"
+                        ></span>
+
+                        <span
+                            id="submit-loader"
+                            class="icon btn-icon-loader"
+                        ></span>
+<span id="submit-label">
+    Run AI Queue Analysis
+</span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+
+        <!-- =====================================================
+             STATUS
+        ====================================================== -->
+
+        <div
+            id="status-box"
+            class="status-box"
+            role="alert"
+            hidden
+        ></div>
+
+
+        <!-- =====================================================
+             RESULTS
+        ====================================================== -->
+
+        <div
+            id="results-box"
+            class="results-box wide glass"
+            hidden
+        >
+
+            <!-- INTRO -->
+
+            <div class="results-intro">
+
+                <div class="results-intro-icon">
+                    ✓
+                </div>
+
+                <div>
+
+                    <span class="results-kicker">
+                        ANALYSIS COMPLETE
+                    </span>
+
+                    <h2>
+                        Your queue analysis
+                    </h2>
+
+                    <p>
+                        Start with your current condition and the
+                        recommended scenario, then explore the detailed
+                        comparison below.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 CURRENT CONDITION
+            ================================================== -->
+
+            <section class="result-section">
+
+                <div class="result-section-heading">
+
+                    <div>
+                        <span class="result-section-kicker">
+                            CURRENT SYSTEM
+                        </span>
+
+                        <h3>
+                            Your current condition
+                        </h3>
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="current-summary"
+                    class="current-summary-grid"
+                >
+
+                    <div class="summary-card">
+
+                        <span class="summary-label">
+                            Average wait
+                        </span>
+
+                        <strong
+                            id="current-wait"
+                            class="summary-value"
+                        >
+                            —
+                        </strong>
+
+                        <small>
+                            minutes
+                        </small>
+
+                    </div>
+
+
+                    <div class="summary-card">
+
+                        <span class="summary-label">
+                            Utilization
+                        </span>
+
+                        <strong
+                            id="current-util"
+                            class="summary-value"
+                        >
+                            —
+                        </strong>
+
+                        <small>
+                            capacity used
+                        </small>
+
+                    </div>
+
+
+                    <div class="summary-card">
+
+                        <span class="summary-label">
+                            Daily cost
+                        </span>
+
+                        <strong
+                            id="current-cost"
+                            class="summary-value"
+                        >
+                            —
+                        </strong>
+
+                        <small>
+                            estimated
+                        </small>
+
+                    </div>
+
+
+                    <div class="summary-card">
+
+                        <span class="summary-label">
+                            Status
+                        </span>
+
+                        <strong
+                            id="current-status"
+                            class="summary-status"
+                        >
+                            —
+                        </strong>
+
+                        <small id="current-status-detail">
+                            —
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+<!-- =================================================
+     AI STRATEGY EXPLORER
+================================================== -->
+
+<div
+    id="ai-strategy-card"
+    class="ai-strategy-card"
+    hidden
+>
+
+    <div class="ai-strategy-header">
+
+        <div class="ai-strategy-icon">
+            ✨
+        </div>
+
+
+        <div>
+
+            <h3>
+                QueueWise AI explored these strategies
+            </h3>
+
+            <p>
+                AI generated possible operational improvements
+                based on your situation.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="ai-strategy-list"
+        class="ai-strategy-list"
+    ></div>
+
+
+</div>
+            <!-- =================================================
+                 RECOMMENDATION
+            ================================================== -->
+
+            <section class="result-section">
+
+                <div
+                    id="recommendation-card"
+                    class="recommendation-card"
+                    hidden
+                >
+
+                    <div class="rec-head">
+
+                        <span class="rec-label">
+
+                            <span
+                                id="rec-label-icon"
+                                class="icon"
+                            ></span>
+
+                            RECOMMENDED SCENARIO
+
+                        </span>
+
+                        <h3 id="recommendation-title">
+                            —
+                        </h3>
+
+                    </div>
+
+
+                    <div
+                        id="recommendation-bignums"
+                        class="rec-bignums"
+                    ></div>
+
+
+                    <p
+                        id="recommendation-reason"
+                        class="rec-reason"
+                    ></p>
+
+
+                    <div
+                        id="recommendation-tags"
+                        class="rec-tags"
+                    ></div>
+
+
+                    <details
+                        id="recommendation-details"
+                        class="rec-details"
+                        hidden
+                    >
+
+                        <summary>
+                            Why was this scenario selected?
+                        </summary>
+
+                        <p
+                            id="recommendation-details-text"
+                        ></p>
+
+                    </details>
+
+
+                    <div
+                        id="alternatives-block"
+                        class="alternatives-block"
+                    >
+
+                        <h4>
+                            Other options
+                        </h4>
+
+                        <ul
+                            id="alternatives-list"
+                            class="alternatives-list"
+                        ></ul>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 FIT AGAINST CRITERIA
+            ================================================== -->
+
+            <section class="result-section">
+
+                <div class="result-section-heading">
+
+                    <div>
+                        <span class="result-section-kicker">
+                            DECISION CHECK
+                        </span>
+
+                        <h3>
+                            Fit against your criteria
+                        </h3>
+
+                        <p>
+                            See how the selected scenario compares
+                            with your wait target and budget.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="indicator-block"
+                    class="indicator-meters"
+                ></div>
+
+            </section>
+
+
+            <!-- =================================================
+                 HOW TO READ RESULTS
+            ================================================== -->
+
+            <section class="result-section">
+
+                <div class="result-section-heading">
+
+                    <div>
+                        <span class="result-section-kicker">
+                            RESULT GUIDE
+                        </span>
+
+                        <h3>
+                            How to read these results
+                        </h3>
+                    </div>
+
+                </div>
+
+
+                <div class="result-guide-grid">
+
+                    <div class="guide-card">
+
+                        <div class="guide-icon">
+                            ⏱
+                        </div>
+
+                        <div>
+                            <strong>
+                                Average wait
+                            </strong>
+
+                            <p>
+                                Lower values mean customers spend
+                                less time waiting before service.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="guide-card">
+
+                        <div class="guide-icon">
+                            %
+                        </div>
+
+                        <div>
+                            <strong>
+                                Utilization
+                            </strong>
+
+                            <p>
+                                Shows how much service capacity is
+                                being used. Very high utilization can
+                                create longer queues.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="guide-card">
+
+                        <div class="guide-icon">
+                            ↗
+                        </div>
+
+                        <div>
+                            <strong>
+                                Throughput
+                            </strong>
+
+                            <p>
+                                The average number of customers served
+                                at the counters per hour.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="guide-card">
+
+                        <div class="guide-icon">
+                            $
+                        </div>
+
+                        <div>
+                            <strong>
+                                Cost per day
+                            </strong>
+
+                            <p>
+                                Estimated daily operating cost for
+                                the tested scenario.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 METHOD
+            ================================================== -->
+
+            <details class="result-method">
+
+                <summary>
+                    How are these results calculated?
+                </summary>
+
+                <p>
+                    Each scenario is simulated for 30 operating days.
+                    Results are reported using the average result and
+                    a 95% confidence interval.
+                </p>
+
+            </details>
+
+
+            <!-- =================================================
+                 CHART
+            ================================================== -->
+
+            <section class="result-section">
+
+                <div class="result-section-heading">
+
+                    <div>
+                        <span class="result-section-kicker">
+                            VISUAL COMPARISON
+                        </span>
+
+                        <h3>
+                            Waiting time vs operating cost
+                        </h3>
+
+                        <p>
+                            Better options generally appear closer
+                            to the bottom-left because they combine
+                            shorter waiting time with lower cost.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="chart-legend">
+
+                    <span>
+                        <i class="legend-dot legend-good"></i>
+                        Meets both targets
+                    </span>
+
+                    <span>
+                        <i class="legend-dot legend-bad"></i>
+                        Misses at least one target
+                    </span>
+
+                </div>
+
+
+                <div class="chart-wrap">
+
+                    <div id="cost-wait-chart"></div>
+
+                    <p class="chart-caption">
+                        The shaded area represents scenarios that
+                        satisfy both your waiting-time target and
+                        daily budget. Horizontal error bars show
+                        uncertainty in simulated average waiting time.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 TABLE
+            ================================================== -->
+
+            <section class="result-section">
+
+                <div class="result-section-heading">
+
+                    <div>
+                        <span class="result-section-kicker">
+                            DETAILED RESULTS
+                        </span>
+
+                        <h3>
+                            Scenario comparison
+                        </h3>
+
+                        <p>
+                            Use the table when you want to compare
+                            all operating metrics in detail.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="table-wrap">
+
+                    <table class="results-table">
+
+                        <thead>
+
+                            <tr>
+                                <th>Scenario</th>
+                                <th>Staff</th>
+                                <th>Avg wait</th>
+                                <th>Utilization</th>
+                                <th>Throughput / hour</th>
+                                <th>Overtime</th>
+                                <th>Cost / day</th>
+                                <th>Budget status</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="results-body"></tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 THEORY VALIDATION
+            ================================================== -->
+
+            <div
+                id="theory-box"
+                class="theory-box"
+                hidden
+            >
+
+                <details>
+
+                    <summary>
+                        View model validation
+                    </summary>
+
+
+                    <div class="theory-content">
+
+                        <h3>
+                            Validation against queueing theory
+                        </h3>
+
+                        <p class="hint">
+                            Pure staffing scenarios are compared
+                            with the Erlang C theoretical waiting time.
+                        </p>
+
+
+                        <div class="table-wrap">
+
+                            <table class="results-table">
+
+                                <thead>
+
+                                    <tr>
+                                        <th>Scenario</th>
+                                        <th>Theory</th>
+                                        <th>Simulation</th>
+                                        <th>Difference</th>
+                                        <th>Within CI</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="theory-body"></tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </details>
+
+            </div>
+
+
+            <!-- =================================================
+                 ASSUMPTIONS
+            ================================================== -->
+
+            <div class="result-footnotes">
+
+                <h4>
+                    Important notes
+                </h4>
+
+                <ul class="assumptions">
+
+                    <li>
+                        <strong>Unstable</strong> means arrivals are
+                        at least as fast as available service capacity.
+                    </li>
+
+                    <li>
+                        <strong>Throughput</strong> counts customers
+                        served at the counters.
+                    </li>
+
+                    <li>
+                        Faster-service and pre-order effects are
+                        user-defined assumptions, not predictions.
+                    </li>
+
+                    <li>
+                        Cost = staff × operating hours × hourly
+                        staff cost + scenario cost.
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- RAW -->
+
+            <details class="raw">
+
+                <summary>
+                    Show technical response data
+                </summary>
+
+                <pre id="raw-json"></pre>
+
+            </details>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+
+<script src="{{ url_for('static', filename='js/analyze.js') }}"></script>
+
+{% endblock %}

@@ -1,0 +1,7 @@
+Flask
+python-dotenv
+simpy
+numpy
+plotly
+gunicorn
+requests
