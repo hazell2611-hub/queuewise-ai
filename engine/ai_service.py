@@ -30,9 +30,10 @@ def get_api_key():
 def call_gemini(
     prompt,
     system_instruction=None,
-    timeout=30,
-    max_retries=4,
+    timeout=12,
+    max_retries=3,
 ):
+    
     api_key = get_api_key()
 
     body = {
